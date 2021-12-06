@@ -32,7 +32,7 @@ class Game
       break if valid_move
       print "\nThat is a Invalid move. Please try again:\n> "
     end
-    
+
     move
   end
 
@@ -64,6 +64,11 @@ class Game
   end
 
   def move_formats(input_str)
-    input_str =~ /^PLACE ([1-8]),([1-8]),(NORTH|SOUTH|EAST|WEST),(BLACK|WHITE)$/ || input_str =~ /^MOVE ([1-2])$/ || ['LEFT','RIGHT','REPORT'].any? { |word| input_str.include?(word) }
+    #Check if its start of the input
+    if @board.pawn_y_position == nil
+      input_str =~ /^PLACE ([1-8]),([1-8]),(NORTH|SOUTH|EAST|WEST),(BLACK|WHITE)$/
+    else
+      input_str =~ /^PLACE ([1-8]),([1-8]),(NORTH|SOUTH|EAST|WEST),(BLACK|WHITE)$/ || input_str =~ /^MOVE ([1-2])$/ || ['LEFT','RIGHT','REPORT'].any? { |word| input_str.include?(word) }
+    end
   end
 end
