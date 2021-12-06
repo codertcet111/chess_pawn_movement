@@ -38,7 +38,9 @@ class Game
 
   def move
     # Make actual chages for :pawn_x_position, :pawn_y_position, :pawn_color, :pawn_direction, :pawn_icon of board
-    
+    @board.pawn_icon = '<'
+    @board.pawn_x_position = 2
+    @board.pawn_y_position = 2
   end
 
   def get_move

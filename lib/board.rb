@@ -40,7 +40,7 @@ class Board
   def display_row(number)
     print "#{9 - number}  "
     # Can check if current Y location is occupied by Pawn or not
-    if @pawn_y_position == number
+    if @pawn_y_position == ( 9 - number)
       (1..8).each do |col_number|
         print @pawn_x_position == col_number ?  "│ #{@pawn_icon}  " : '│    '
       end
