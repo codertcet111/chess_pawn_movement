@@ -10,7 +10,7 @@ class Board
   end
 
   def self.pawn_icons
-    {'NORTH': '^', 'SOUTH': 'v', 'WEST': '<', 'EAST': '>'}
+    {'NORTH' => '^', 'EAST' => '>', 'SOUTH' => 'v', 'WEST' => '<'}
   end
 
   def display
