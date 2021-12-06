@@ -19,7 +19,7 @@ class Game
   end
 
   def next_input
-    print "Give next command, in the below format:"
+    print "Give next command, in the below format: (In Capital only)"
     puts "PLACE X,Y,F,C"
     puts "MOVE X"
     puts "LEFT"
@@ -28,25 +28,32 @@ class Game
 
     loop do
       move = get_move
-      valid_move = true
+      valid_move = validate_move
       break if valid_move
       print "\nThat is a Invalid move. Please try again:\n> "
     end
-
+    
     move
+  end
+
+  def validate_move
+    true
   end
 
   def move
     # Make actual chages for :pawn_x_position, :pawn_y_position, :pawn_color, :pawn_direction, :pawn_icon of board
-    @board.pawn_icon = '<'
-    @board.pawn_x_position = 2
-    @board.pawn_y_position = 2
+    # @board.pawn_icon = '<'
+    # @board.pawn_x_position = 2
+    # @board.pawn_y_position = 2
+
+
+
   end
 
   def get_move
     move = input
     until move_formats(move)
-      print "\nThat doesn't appear to be in the correct format. Please see the above instructions.\n> "
+      print "\nThat doesn't seems to be in the correct format. Please see the above instructions.\n> "
       move = input
     end
     move
@@ -57,6 +64,6 @@ class Game
   end
 
   def move_formats(input_str)
-    true
+    input_str =~ /^PLACE ([1-8]),([1-8]),(NORTH|SOUTH|EAST|WEST),(BLACK|WHITE)$/ || input_str =~ /^MOVE ([1-2])$/ || ['LEFT','RIGHT','REPORT'].any? { |word| input_str.include?(word) }
   end
 end
