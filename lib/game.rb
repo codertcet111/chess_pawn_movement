@@ -12,19 +12,22 @@ class Game
   end
 
   def start
+    # Run the loop for infinite time
     until false
+      # In this simulator, we are taking input, printing entire board with pawn and then again clearing the terminal and taking input again
       next_input
       @board.display
     end
   end
 
   def next_input
-    puts "Give next command, in the below format: (In Capital only)"
-    puts "PLACE X,Y,F,C"
+    puts "Give next command, in the below format with examples (In capitals only)"
+    puts "PLACE X,Y,F,C  (For example, PLACE 2,3,NORTH,BLACK)"
     puts "MOVE X"
     puts "LEFT"
     puts "RIGHT"
-    puts "REPORT\n"
+    puts "REPORT"
+    puts "Q (To Quit the game)"
     move = "REPORT"
     loop do
       move = get_move
@@ -93,14 +96,18 @@ class Game
       @board.pawn_direction, @board.pawn_icon = Board.pawn_icons.to_a[current_index == 3 ? 0 : current_index + 1]
     elsif move == 'REPORT'
       # No movement only print report
-      puts "** Report:\n"
+      puts "** Report:"
+      puts "#{@board.pawn_x_position},#{@board.pawn_y_position},#{@board.pawn_direction},#{@board.pawn_color}"
+    elsif move == 'Q'
+      exit
     end
   end
 
   def get_move
     move = input
     until move_formats(move)
-      print "\nThat doesn't seems to be in the correct format. Please see the above instructions.\n> "
+      puts "\nThat doesn't seems to be in the correct format. Please see the above instructions."
+      puts "If its first instruction, then only PLACE command is allowed"
       move = input
     end
     move
@@ -115,7 +122,7 @@ class Game
     if @board.pawn_y_position == nil
       input_str =~ /^PLACE ([1-8]),([1-8]),(NORTH|SOUTH|EAST|WEST),(BLACK|WHITE)$/
     else
-      input_str =~ /^PLACE ([1-8]),([1-8]),(NORTH|SOUTH|EAST|WEST),(BLACK|WHITE)$/ || input_str =~ /^MOVE ([1-2])$/ || ['LEFT','RIGHT','REPORT'].any? { |word| input_str.include?(word) }
+      input_str =~ /^PLACE ([1-8]),([1-8]),(NORTH|SOUTH|EAST|WEST),(BLACK|WHITE)$/ || input_str =~ /^MOVE ([1-2])$/ || ['LEFT','RIGHT','REPORT','Q'].any? { |word| input_str.include?(word) }
     end
   end
 end
