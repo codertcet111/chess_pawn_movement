@@ -21,7 +21,7 @@ class Game
   end
 
   def next_input
-    puts "Give next command, in the below format with examples (In capitals only)"
+    puts "Give next command, in the below format with examples (In capital only)"
     puts "PLACE X,Y,F,C  (For example, PLACE 2,3,NORTH,BLACK)"
     puts "MOVE X"
     puts "LEFT"

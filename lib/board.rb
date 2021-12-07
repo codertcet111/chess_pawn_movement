@@ -13,6 +13,10 @@ class Board
     {'NORTH' => '^', 'EAST' => '>', 'SOUTH' => 'v', 'WEST' => '<'}
   end
 
+  def self.bold(str)
+    "\e[1m#{str}\e[22m"
+  end
+
   def display
     clear_terminal
     print "PAWN SIMULATION: Let's move the pawn \n\n"
@@ -42,7 +46,7 @@ class Board
     # Can check if current Y location is occupied by Pawn or not
     if @pawn_y_position == ( 9 - number)
       (1..8).each do |col_number|
-        print @pawn_x_position == col_number ?  "│ #{@pawn_icon}  " : '│    '
+        print @pawn_x_position == col_number ?  "│ #{@pawn_color == 'WHITE' ? @pawn_icon : Board.bold(@pawn_icon)}  " : '│    '
       end
     else
       print '│    ' * 8
