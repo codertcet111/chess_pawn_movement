@@ -7,6 +7,7 @@ class Board
     @pawn_color = nil
     @pawn_direction = nil
     @pawn_icon = nil
+    #The color, white and black handled as, black: bold, white: normal arrow
   end
 
   def self.pawn_icons
